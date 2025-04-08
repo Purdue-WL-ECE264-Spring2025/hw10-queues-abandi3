@@ -35,6 +35,7 @@ while (current != NULL)
   if (serial == current->value) {
     return 1;
   }
+  current = current->next;
 }
     return 0;
 }
@@ -49,24 +50,33 @@ int number_of_moves(struct game_state start) {
             free_list(q.data);
             return current.num_steps;
         }
+        // printf("hello\n");
         struct game_state next = current;
+        if (next.empty_row == 3) {
+            // printf("up should not move\n");
+            // printf("next.empty_row = %d, current.empty_row = %d\n", next.empty_row, current.empty_row);
+        }
         move_up(&next);
-        if (!(searchList(q.data, serialize(next)) && next.empty_col != current.empty_col && next.empty_row != current.empty_row)) {
+        if (!searchList(q.data, serialize(next)) && next.empty_row != current.empty_row) {
+            // printf("up\n");
             enqueue(&q, next);
         }
         next = current;
         move_down(&next);
-        if (!(searchList(q.data, serialize(next)) && next.empty_col != current.empty_col && next.empty_row != current.empty_row)) {
+        if (!searchList(q.data, serialize(next)) && next.empty_row != current.empty_row) {
+            // printf("down\n");
             enqueue(&q, next);
         }
         next = current;
         move_right(&next);
-        if (!(searchList(q.data, serialize(next)) && next.empty_col != current.empty_col && next.empty_row != current.empty_row)) {
+        if (!searchList(q.data, serialize(next)) && next.empty_col != current.empty_col) {
+            // printf("right\n");
             enqueue(&q, next);
         }
         next = current;
         move_left(&next);
-        if (!(searchList(q.data, serialize(next)) && next.empty_col != current.empty_col && next.empty_row != current.empty_row)) {
+        if (!searchList(q.data, serialize(next)) && next.empty_col != current.empty_col) {
+            // printf("left\n");
             enqueue(&q, next);
         }
     }

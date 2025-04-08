@@ -12,13 +12,18 @@ struct list_node *new_node(size_t value) {
 
 void insert_at_head(struct linked_list *list, size_t value) {
 
-struct list_node *newHead = new_node(value);\
+struct list_node *newHead = new_node(value);
 newHead->next = list->head;
 list->head = newHead;
 }
 
 void insert_at_tail(struct linked_list *list, size_t value) {
+  // struct list_node *newNode = new_node(value);
+  
   struct list_node *currentNode = list->head; 
+  if (list->head == NULL) {
+    
+  }
   while (currentNode->next != NULL) {
     currentNode = currentNode->next;
   }
