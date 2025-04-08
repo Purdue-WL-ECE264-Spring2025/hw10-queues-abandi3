@@ -27,7 +27,7 @@ static int finalCheck (struct game_state start) {
     return 1;
 }
 
-static int searchList (struct linked_list list, int serial) {
+static int searchList (struct linked_list list, uint64_t serial) {
     struct list_node *current = list.head;
 
 while (current != NULL)
